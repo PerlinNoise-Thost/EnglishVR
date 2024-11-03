@@ -12,12 +12,10 @@ public abstract class Data_Base : MonoBehaviour
     /// </summary>
     /// <param name="path">路径</param>
     /// <param name="Length">有效列数</param>
-    /// <param name="configDict">字典</param>
-    /// <typeparam name="T">类</typeparam>
+    /// <param name="configDict">接受的字典</param>
+    /// <typeparam name="T">字典的类(字典的值是类)</typeparam>
     public IEnumerator LoadCFG<T>(string path,int Length,Dictionary<string, T> configDict) where T : new()
     {
-        debug.log("ok")
-
         FileStream fs = new FileStream(path, FileMode.Open);
         using (ExcelPackage package = new ExcelPackage(fs))
         {
