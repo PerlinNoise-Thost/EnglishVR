@@ -16,6 +16,8 @@ public abstract class Data_Base : MonoBehaviour
     /// <typeparam name="T">类</typeparam>
     public IEnumerator LoadCFG<T>(string path,int Length,Dictionary<string, T> configDict) where T : new()
     {
+        debug.log("ok")
+
         FileStream fs = new FileStream(path, FileMode.Open);
         using (ExcelPackage package = new ExcelPackage(fs))
         {
