@@ -15,6 +15,8 @@ public class Controller_Initialize : Controller_Base
     {
         "Data_All",
         "UI_All",
+        "Task_1",
+        "TaskPool"
     };
 
     /// <summary>

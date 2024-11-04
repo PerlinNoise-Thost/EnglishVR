@@ -22,11 +22,11 @@ public abstract class UI_Base : MonoBehaviour
     /// <summary>
     /// 打开
     /// </summary>
-    public virtual IEnumerator OpenNowUI()
+    public virtual IEnumerator OpenNowUI(float _alpha)
     {
         CanvasGroup panelCanvasGroup= GetComponent<CanvasGroup>();
         panelCanvasGroup.blocksRaycasts = true;
-        panelCanvasGroup.alpha = 1;
+        panelCanvasGroup.alpha = _alpha;
         this.gameObject.SetActive(true);
         
         yield break;
@@ -54,18 +54,18 @@ public abstract class UI_Base : MonoBehaviour
     /// <param name="endAlpha">目标Alpha</param>
     /// <param name="time">时间</param>
     /// <returns></returns>
-    protected IEnumerator Fade(CanvasGroup canvasGroup,float startAlpha, float endAlpha, float time)
+    public IEnumerator Fade(float startAlpha, float endAlpha, float time)
     {
         float elapsedTime = 0f;
 
         while (elapsedTime < time)
         {
             elapsedTime += UnityEngine.Time.deltaTime;
-            canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / time);
+            GetComponent<CanvasGroup>().alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / time);
             yield return null;
         }
 
-        canvasGroup.alpha = endAlpha;
+        GetComponent<CanvasGroup>().alpha = endAlpha;
     }
 
     /// <summary>

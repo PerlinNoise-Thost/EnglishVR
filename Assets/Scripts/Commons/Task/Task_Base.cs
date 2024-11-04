@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Task_Base : MonoBehaviour,ITask
+public abstract class Task_Base : MonoBehaviour,ITask,IInitialization
 {
+    public string DataSetSequence => GetType().ToString();
+    public virtual IEnumerator Data_Set()
+    {
+        yield return null;
+    }
+    
     /// <summary>
     /// 任务排序用字段
     /// </summary>
