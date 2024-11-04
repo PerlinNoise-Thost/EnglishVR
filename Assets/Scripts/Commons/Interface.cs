@@ -9,7 +9,7 @@ using UnityEngine;
 public interface ITask
 {
     public string TaskSetSequence { get; }  //任务排序用字段
-    List<IEnumerator> TaskSequence(); //当前任务的任务序列
+    List<IEnumerator> TaskSequence { get; } //当前任务的任务序列
 }
 
 /// <summary>

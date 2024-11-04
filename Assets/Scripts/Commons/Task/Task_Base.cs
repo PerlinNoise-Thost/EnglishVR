@@ -8,10 +8,30 @@ public abstract class Task_Base : MonoBehaviour,ITask
     /// 任务排序用字段
     /// </summary>
     public virtual string TaskSetSequence => this.GetType().ToString();
+    
     /// <summary>
     /// 子任务列表
     /// </summary>
     /// <returns></returns>
-    public abstract List<IEnumerator> TaskSequence();
+    public abstract List<IEnumerator> TaskSequence { get; }
+    
+    /// <summary>
+    /// 任务并发
+    /// </summary>
+    /// <param name="coroutinesToRun">需要并发的任务</param>
+    /// <returns></returns>
+    public IEnumerator ConcurrentTake(params IEnumerator[] coroutinesToRun)
+    {
+        List<Coroutine> coroutines = new List<Coroutine>();
 
+        foreach (var coroutine in coroutinesToRun)
+        {
+            coroutines.Add(StartCoroutine(coroutine));
+        }
+
+        foreach (var coroutine in coroutines)
+        {
+            yield return coroutine; 
+        }
+    }
 }

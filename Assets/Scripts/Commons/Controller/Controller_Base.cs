@@ -17,18 +17,16 @@ public class Controller_Base : MonoBehaviour
     /// <returns></returns>
     public IEnumerator SortByReference<T>(List<T> IIn, string PROPName, List<string> InitializationOrder) 
     {
-        // 获取排序后的列表
         var sortedIIn = IIn.OrderBy(i => 
         {
             var dataSetSequence = typeof(T).GetProperty(PROPName)?.GetValue(i);
             return InitializationOrder.IndexOf(dataSetSequence?.ToString());
         }).ToList();
 
-        // 清空原始列表并添加排序后的结果
         IIn.Clear();
         IIn.AddRange(sortedIIn);
 
-        Debug.Log("排序后的顺序: " + string.Join(", ", IIn.Select(i => 
+        Debug.Log("顺序: " + string.Join(",", IIn.Select(i => 
         {
             var dataSetSequence = typeof(T).GetProperty(PROPName)?.GetValue(i);
             return dataSetSequence?.ToString();

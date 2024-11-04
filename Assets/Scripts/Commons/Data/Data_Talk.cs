@@ -59,7 +59,8 @@ public class Data_Talk : Data_Base<Data_Talk>
     {
         foreach (var data in datas)
         {
-            data.Value.audio = Resources.Load<AudioClip>(data.Value.Content);
+            //data.Value.audio = Resources.Load<AudioClip>(data.Value.Content);
+            data.Value.audio = Resources.Load<AudioClip>("Test");
         }
         
         yield break;

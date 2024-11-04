@@ -43,19 +43,17 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+    
+    //数据控制
+    public Controller_Data ControllerData;
+    //任务控制
+    public Controller_Task ControllerTask;
+    //UI控制
+    public Controller_UI ControllerUI;
+    //Talk控制
+    public Controller_Talk ControllerTalk;
 
     
-
-    [Header("任务执行排序")] 
-    public List<string> Task_Execute_Key = new List<string>()
-    {
-        "Task_1"
-    };
-
-    //数据控制
-    [FormerlySerializedAs("dataControllerBase")] [FormerlySerializedAs("dataBaseController")] [FormerlySerializedAs("DataController")] public Controller_Data controllerData;
-    //任务控制
-    [FormerlySerializedAs("taskControllerBase")] [FormerlySerializedAs("taskBaseController")] [FormerlySerializedAs("taskController")] [FormerlySerializedAs("TalkController")] public Controller_Task controllerTask;
     
     public void Awake()
     {
