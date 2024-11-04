@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,14 +44,22 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    public List<String> Data_Set_Key = new List<string>()
+    
+
+    [Header("任务执行排序")] 
+    public List<string> Task_Execute_Key = new List<string>()
     {
-        "Data_Talk",
-        "Data_UI"
+        "Task_1"
     };
+
+    //数据控制
+    [FormerlySerializedAs("dataControllerBase")] [FormerlySerializedAs("dataBaseController")] [FormerlySerializedAs("DataController")] public Controller_Data controllerData;
+    //任务控制
+    [FormerlySerializedAs("taskControllerBase")] [FormerlySerializedAs("taskBaseController")] [FormerlySerializedAs("taskController")] [FormerlySerializedAs("TalkController")] public Controller_Task controllerTask;
     
     public void Awake()
     {
         IAI();
+        DontDestroyOnLoad(this);
     }
 }
