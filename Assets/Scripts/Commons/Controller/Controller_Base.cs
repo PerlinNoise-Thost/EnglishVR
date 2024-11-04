@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Controller_Base : MonoBehaviour
@@ -40,7 +42,7 @@ public class Controller_Base : MonoBehaviour
     /// </summary>
     /// <typeparam name="T">接口类型</typeparam>
     /// <returns>实现指定接口的对象的列表</returns>
-    public List<T> FindInterfaces<T>() where T : class
+    public IEnumerator FindInterfaces<T>(Action<List<T>> callback) where T : class
     {
         // 查找场景中所有的MonoBehaviour对象
         MonoBehaviour[] allMonoBehaviours = FindObjectsOfType<MonoBehaviour>();
@@ -59,6 +61,8 @@ public class Controller_Base : MonoBehaviour
             }
         }
 
-        return interfaces;
+        callback(interfaces);
+        
+        yield break;
     }
 }
