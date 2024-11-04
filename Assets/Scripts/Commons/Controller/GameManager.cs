@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -42,8 +43,14 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    public List<String> Data_Set_Key = new List<string>()
+    {
+        "Data_Talk",
+        "Data_UI"
+    };
+    
     public void Awake()
     {
-        
+        IAI();
     }
 }

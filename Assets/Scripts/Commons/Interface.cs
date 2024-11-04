@@ -8,8 +8,8 @@ using UnityEngine;
 /// </summary>
 public interface IInitialization
 {
-    public string DataSetSequence { get; }
-    IEnumerator Data_Set(); //初始化方法，由Manager统一初始化
+    public string DataSetSequence { get; } //初始化排序用字段
+    IEnumerator Data_Set();  //初始化方法，由Manager统一初始化
 }
 
 /// <summary>

@@ -7,6 +7,8 @@ using UnityEngine;
 
 public abstract class Data_Base : MonoBehaviour
 {
+    public abstract string path { get; }
+    
     /// <summary>
     /// 读取表格
     /// </summary>
@@ -46,4 +48,5 @@ public abstract class Data_Base : MonoBehaviour
         
         yield break;
     }
+
 }
