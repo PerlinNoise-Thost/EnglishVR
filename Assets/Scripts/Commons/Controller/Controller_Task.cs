@@ -27,6 +27,8 @@ public class Controller_Task : Controller_Base,IInitialization
 
         yield return StartCoroutine(TaskPool(tasks));
     }
+
+    public Task_1 Task1;
     
     [Header("任务执行排序")] 
     public List<string> Task_Execute_Key = new List<string>()

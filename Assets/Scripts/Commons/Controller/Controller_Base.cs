@@ -26,11 +26,11 @@ public class Controller_Base : MonoBehaviour
         IIn.Clear();
         IIn.AddRange(sortedIIn);
 
-        Debug.Log("顺序: " + string.Join(",", IIn.Select(i => 
+        Debug.Log($"{typeof(T)} 的顺序: "+"\n\n" + string.Join("\n", IIn.Select(i => 
         {
             var dataSetSequence = typeof(T).GetProperty(PROPName)?.GetValue(i);
-            return dataSetSequence?.ToString();
-        })));
+            return dataSetSequence?.ToString() ?? "无数据";
+        }))+"\n");
     
         yield break;
     }

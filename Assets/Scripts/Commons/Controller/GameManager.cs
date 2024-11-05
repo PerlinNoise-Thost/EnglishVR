@@ -52,7 +52,8 @@ public class GameManager : MonoBehaviour
     public Controller_UI ControllerUI;
     //Talk控制
     public Controller_Talk ControllerTalk;
-
+    //Prop控制
+    public Controller_Prop ControllerProp;
     
     
     public void Awake()

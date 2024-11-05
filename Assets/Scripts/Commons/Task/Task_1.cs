@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class Task_1 : Task_Base
 {
@@ -10,6 +14,8 @@ public class Task_1 : Task_Base
     private string uiData_Screen_Content_1;
     //Screen面板正文_2
     private string uiData_Screen_Content_2;
+
+    public XRGrabInteractable XRGI_Passport;
     
     public override IEnumerator Data_Set()
     {
@@ -53,6 +59,8 @@ public class Task_1 : Task_Base
         GameManager.Instance.ControllerUI.UIScreen.SetContent(uiData_Screen_Content_2),
         GameManager.Instance.ControllerUI.UIScreen.Fade(0f,1f,1f),
         
+        GameManager.Instance.ControllerProp.PropPassport.RegisterGrab(OnObjectSelected),
+        
     };
 
     /// <summary>
@@ -87,5 +95,11 @@ public class Task_1 : Task_Base
     public IEnumerator WaitTime(float timer)
     {
         yield return new WaitForSeconds(timer);
+    }
+    
+    public void OnObjectSelected(SelectEnterEventArgs args)
+    {
+        Debug.Log("对象已被选中: " + args.interactableObject.GetType());
+        // 在这里可以执行其他选中时的操作
     }
 }

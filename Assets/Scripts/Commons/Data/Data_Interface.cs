@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 
 /// <summary>
 /// 统一初始化接口(Awake)
