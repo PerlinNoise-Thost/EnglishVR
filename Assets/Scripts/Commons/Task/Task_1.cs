@@ -59,7 +59,7 @@ public class Task_1 : Task_Base
         GameManager.Instance.ControllerUI.UIScreen.SetContent(uiData_Screen_Content_2),
         GameManager.Instance.ControllerUI.UIScreen.Fade(0f,1f,1f),
         
-        GameManager.Instance.ControllerProp.PropPassport.RegisterGrab(OnObjectSelected),
+        
         
     };
 
@@ -96,10 +96,32 @@ public class Task_1 : Task_Base
     {
         yield return new WaitForSeconds(timer);
     }
+
+    public IEnumerator ReturnItem()
+    {
+        AudioClip talkData_Start = GameManager.Instance.ControllerData.DataTalk.GetData("Take_2_6_Tips");
+        AudioClip talkData_Tips = GameManager.Instance.ControllerData.DataTalk.GetData("Take_2_6_Tips");
+        yield return StartCoroutine(GameManager.Instance.ControllerTalk.TalkPlayer.PlayTalk(talkData_Tips));
+        yield return StartCoroutine(GameManager.Instance.ControllerTalk.TalkPlayer.PlayTalk(talkData_Start));
+
+        yield return WaitTime(1f);
+
+        
+        GameManager.Instance.ControllerProp.PropPassport.RegisterGrab((args) =>
+        {
+            OnObjectSelected(args, externalParam);
+        });
+            
+        for (int i = 0; i < 5; i++)
+        {
+            while (true)
+            {
+            }
+        }
+    }
     
     public void OnObjectSelected(SelectEnterEventArgs args)
     {
-        Debug.Log("对象已被选中: " + args.interactableObject.GetType());
-        // 在这里可以执行其他选中时的操作
+        Debug.Log("对象已被选中: " + args.interactableObject.transform.gameObject);
     }
 }
