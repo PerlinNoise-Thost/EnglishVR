@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -106,6 +107,8 @@ public class Task_1 : Task_Base
         yield return WaitTime(1f);
 
         GameObject nowHandGameObject = null;
+        GameObject nowShowcaseGameObject = null;
+        GameObject nowShowcase = null;
 
         GameManager.Instance.ControllerProp.PropPassport.RegisterGrab(args =>
         {
@@ -157,14 +160,75 @@ public class Task_1 : Task_Base
             nowHandGameObject = null;
             Debug.Log("对象已被丢弃: " + args.interactableObject.transform.gameObject);
         });
-
-        List<string> Prop_Task_1 = new List<string>()
+        
+        GameManager.Instance.ControllerProp.propShowcaseT11.EOnCollisionEnter.AddListener((args,sc) =>
         {
-            typeof(Prop_Passport).ToString(),
-            typeof(Prop_Luggage).ToString(),
-            typeof(Prop_Suitcase).ToString(),
-            typeof(Prop_Troller).ToString(),
-            typeof(Prop_Charger).ToString(),
+            nowShowcaseGameObject = args;
+            nowShowcase = sc;
+        });
+        GameManager.Instance.ControllerProp.propShowcaseT12.EOnCollisionEnter.AddListener((args,sc) =>
+        {
+            nowShowcaseGameObject = args;
+            nowShowcase = sc;
+        });
+        GameManager.Instance.ControllerProp.propShowcaseT13.EOnCollisionEnter.AddListener((args,sc) =>
+        {
+            nowShowcaseGameObject = args;
+            nowShowcase = sc;
+        });
+        GameManager.Instance.ControllerProp.propShowcaseT14.EOnCollisionEnter.AddListener((args,sc) =>
+        {
+            nowShowcaseGameObject = args;
+            nowShowcase = sc;
+        });
+        GameManager.Instance.ControllerProp.propShowcaseT15.EOnCollisionEnter.AddListener((args,sc) =>
+        {
+            nowShowcaseGameObject = args;
+            nowShowcase = sc;
+        });
+        
+        GameManager.Instance.ControllerProp.propShowcaseT11.EOnCollisionExit.AddListener((args,sc) =>
+        {
+            nowShowcaseGameObject = null;
+            nowShowcase = null;
+        });
+        GameManager.Instance.ControllerProp.propShowcaseT12.EOnCollisionExit.AddListener((args,sc) =>
+        {
+            nowShowcaseGameObject = null;
+            nowShowcase = null;
+        });
+        GameManager.Instance.ControllerProp.propShowcaseT13.EOnCollisionExit.AddListener((args,sc) =>
+        {
+            nowShowcaseGameObject = null;
+            nowShowcase = null;
+        });
+        GameManager.Instance.ControllerProp.propShowcaseT14.EOnCollisionExit.AddListener((args,sc) =>
+        {
+            nowShowcaseGameObject = null;
+            nowShowcase = null;
+        });
+        GameManager.Instance.ControllerProp.propShowcaseT15.EOnCollisionExit.AddListener((args,sc) =>
+        {
+            nowShowcaseGameObject = null;
+            nowShowcase = null;
+        });
+
+        List<Type> Prop_Task_1 = new List<Type>()
+        {
+            typeof(Prop_Passport),
+            typeof(Prop_Luggage),
+            typeof(Prop_Suitcase),
+            typeof(Prop_Troller),
+            typeof(Prop_Charger),
+        };
+
+        List<string> PropShowCase_Task_1 = new List<string>()
+        {
+            typeof(Prop_Showcase_T1_1).ToString(),
+            typeof(Prop_Showcase_T1_2).ToString(),
+            typeof(Prop_Showcase_T1_3).ToString(),
+            typeof(Prop_Showcase_T1_4).ToString(),
+            typeof(Prop_Showcase_T1_5).ToString(),
         };
 
         List<AudioClip> AudioClips_T1_PickUp = new List<AudioClip>()
@@ -184,23 +248,100 @@ public class Task_1 : Task_Base
             GameManager.Instance.ControllerData.DataTalk.GetData("Take_2_6_Troller_Put"),
             GameManager.Instance.ControllerData.DataTalk.GetData("Take_2_6_Charger_Put"),
         };
+        List<AudioClip> AudioClips_T1_Error = new List<AudioClip>()
+        {
+            GameManager.Instance.ControllerData.DataTalk.GetData("Take_2_6_Passport_Error"),
+            GameManager.Instance.ControllerData.DataTalk.GetData("Take_2_6_Luggage_Error"),
+            GameManager.Instance.ControllerData.DataTalk.GetData("Take_2_6_Suitcase_Error"),
+            GameManager.Instance.ControllerData.DataTalk.GetData("Take_2_6_Troller_Error"),
+            GameManager.Instance.ControllerData.DataTalk.GetData("Take_2_6_Charger_Error"),
+        };
 
         for (int i = 0; i < 5; i++)
         {
-            yield return StartCoroutine(GameManager.Instance.ControllerTalk.TalkPlayer.PlayTalk(AudioClips_T1_PickUp[i]));
-            while (true)
+            nowShowcaseGameObject = null;
+            nowShowcase = null;
+            yield return StartCoroutine(P_H_State_1(i));
+            Debug.Log("这波没了");
+        }
+        
+        Debug.Log("任务1 完成");
+        
+        IEnumerator P_H_State_1(int index)
+        {
+           yield return StartCoroutine(GameManager.Instance.ControllerTalk.TalkPlayer.PlayTalk(AudioClips_T1_PickUp[index]));
+           Debug.Log("请捡起来");
+            while (nowHandGameObject == null)
             {
-                while (nowHandGameObject.GetComponent<Prop_Base>().ToString() == Prop_Task_1[i])
-                {
-                   yield return StartCoroutine(GameManager.Instance.ControllerTalk.TalkPlayer.PlayTalk(AudioClips_T1_Put[i]));
-                }
+                yield return null;
+            }
+
+            yield return StartCoroutine(P_H_State_2(index));
+        }
+
+        IEnumerator P_H_State_2(int index)
+        {
+            // 使用 is 判断类型
+            if (nowHandGameObject.GetComponent<Prop_Base>().GetType()==Prop_Task_1[index])
+            {
+                // 捡对了，请放下
+                Debug.Log("捡对了，请放下");
+                yield return StartCoroutine(GameManager.Instance.ControllerTalk.TalkPlayer.PlayTalk(AudioClips_T1_Put[index]));
 
                 while (nowHandGameObject != null)
                 {
-                    
+                    yield return null;
                 }
+
+                // 检查是否放到了展示柜上
+                if (nowShowcaseGameObject != null)
+                {
+                    yield return StartCoroutine(P_H_State_3(index));
+                }
+                else
+                {
+                    yield return StartCoroutine(P_H_State_1(index));
+                }
+            }
+            else
+            {
+                // 捡错了，重新捡
+                if (nowHandGameObject != null)
+                {
+                    Debug.Log("捡错了，重新捡");
+                    yield return StartCoroutine(GameManager.Instance.ControllerTalk.TalkPlayer.PlayTalk(AudioClips_T1_Error[index]));
+                }
+
+                // 等待物品丢弃后重新开始
+                while (nowHandGameObject != null)
+                {
+                    yield return null;
+                }
+
+                yield return StartCoroutine(P_H_State_1(index));
+            }
+        }
+
+
+        IEnumerator P_H_State_3(int index)
+        {
+            if (nowShowcase.GetComponent<Prop_Showcase_Base>().GetType().ToString() == PropShowCase_Task_1[index])
+            {
+                Debug.Log("放对柜子了");
                 yield return null;
+            }
+            else
+            {
+                Debug.Log("放错展柜了");
+                while (nowHandGameObject.GetComponent<Prop_Base>().GetType() != Prop_Task_1[index])
+                {
+                    yield return null;
+                }
+
+                yield return StartCoroutine(P_H_State_2(index));
             }
         }
     }
+
+    
 }
