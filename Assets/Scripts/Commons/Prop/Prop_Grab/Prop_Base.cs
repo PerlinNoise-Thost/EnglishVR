@@ -20,19 +20,27 @@ public abstract class Prop_Base : MonoBehaviour,IInitialization
     
     private XRGrabInteractable interactable;
 
-    public virtual IEnumerator RegisterGrab(UnityAction<SelectEnterEventArgs> args)
+    public virtual void RegisterGrab(UnityAction<SelectEnterEventArgs> args)
     {
         // 注册 OnSelectEntered 事件
         interactable.selectEntered.AddListener(args);
-
-        yield return null;
     }
 
-    public virtual IEnumerator DisRegisterGrab(UnityAction<SelectEnterEventArgs> args)
+    public virtual void DisRegisterGrab(UnityAction<SelectEnterEventArgs> args)
     {
         // 注销 OnSelectEntered 事件
         interactable.selectEntered.RemoveListener(args);
+    }
+    
+    public virtual void WithDrowGrab(UnityAction<SelectExitEventArgs> args)
+    {
+        // 注册 selectExited 事件
+        interactable.selectExited.AddListener(args);
+    }
 
-        yield return null;
+    public virtual void DisWithDrowGrab(UnityAction<SelectExitEventArgs> args)
+    {
+        // 注销 selectExited 事件
+        interactable.selectExited.RemoveListener(args);
     }
 }

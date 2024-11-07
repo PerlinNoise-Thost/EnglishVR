@@ -509,8 +509,12 @@ MonoBehaviour:
   Data_Set_Key:
   - Data_All
   - UI_All
-  - Prop_Passport
   - Task_1
+  - Prop_Passport
+  - Prop_Charger
+  - Prop_Suitcase
+  - Prop_Luggage
+  - Prop_Troller
   - TaskPool
 --- !u!114 &712540993
 MonoBehaviour:
@@ -1139,7 +1143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9ff4be385a4e449db079c8473d2207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XRGI_Passport: {fileID: 0}
 --- !u!1 &1301740141
 GameObject:
   m_ObjectHideFlags: 0
