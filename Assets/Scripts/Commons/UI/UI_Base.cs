@@ -27,9 +27,9 @@ public abstract class UI_Base : MonoBehaviour
         CanvasGroup panelCanvasGroup= GetComponent<CanvasGroup>();
         panelCanvasGroup.blocksRaycasts = true;
         panelCanvasGroup.alpha = _alpha;
-        this.gameObject.SetActive(true);
+        //this.gameObject.SetActive(true);
         
-        yield break;
+        yield return null;
     }
     
     /// <summary>
@@ -40,9 +40,9 @@ public abstract class UI_Base : MonoBehaviour
         CanvasGroup panelCanvasGroup= GetComponent<CanvasGroup>();
         panelCanvasGroup.blocksRaycasts = false;
         panelCanvasGroup.alpha = 0;
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
         
-        yield break;
+        yield return null;
     }
     
     /// <summary>

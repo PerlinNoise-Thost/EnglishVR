@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
     public Controller_Talk ControllerTalk;
     //Prop控制
     public Controller_Prop ControllerProp;
+    //相机
+    public MainCamera MainCamera;
     
     
     public void Awake()

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -51,7 +52,6 @@ public class Task_1 : Task_Base
         ReadAndShowUI("Take_2_5", "Take_2_5"),
         GameManager.Instance.ControllerUI.UIFace1.Fade(1f, 0f, 1f), //渐隐
         WaitTime(5f),
-        GameManager.Instance.ControllerUI.UIFace1.Fade(1f, 0f, 1f), //渐隐
         GameManager.Instance.ControllerUI.UIFace1.ExitNowUI(), //关闭 Face_1 面板
 
         /* 教师导入部分完成 */
@@ -60,7 +60,12 @@ public class Task_1 : Task_Base
         WaitTime(3f),
         GameManager.Instance.ControllerUI.UIScreen.Fade(0f, 1f, 1f),
 
-        ReturnItem(),
+        //ReturnItem(),
+        
+        GameManager.Instance.ControllerUI.UIFace1.SetContent(null),
+        GameManager.Instance.ControllerUI.UIFace1.OpenNowUI(1f),
+        Task_1_End(),
+        
     };
 
     /// <summary>
@@ -69,7 +74,7 @@ public class Task_1 : Task_Base
     /// <param name="TalkKey">TalkKey</param>
     /// <param name="UIKey">UIKey</param>
     /// <returns></returns>
-    public IEnumerator ReadAndShowUI(string TalkKey, [CanBeNull] string UIKey)
+    public IEnumerator ReadAndShowUI(string TalkKey,string UIKey)
     {
         var uiData = GameManager.Instance.ControllerData.DataUI.GetData(UIKey);
         var talkData = GameManager.Instance.ControllerData.DataTalk.GetData(TalkKey);
@@ -97,6 +102,10 @@ public class Task_1 : Task_Base
         yield return new WaitForSeconds(timer);
     }
 
+    /// <summary>
+    /// 听音拾物
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator ReturnItem()
     {
         AudioClip talkData_Start = GameManager.Instance.ControllerData.DataTalk.GetData("Take_2_6_Start");
@@ -265,8 +274,6 @@ public class Task_1 : Task_Base
             Debug.Log("这波没了");
         }
         
-        Debug.Log("任务1 完成");
-        
         IEnumerator P_H_State_1(int index)
         {
            yield return StartCoroutine(GameManager.Instance.ControllerTalk.TalkPlayer.PlayTalk(AudioClips_T1_PickUp[index]));
@@ -343,5 +350,44 @@ public class Task_1 : Task_Base
         }
     }
 
-    
+    /// <summary>
+    /// 任务 1 结束
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Task_1_End()
+    {
+        Debug.Log("进入任务一结束阶段");
+        
+        Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>()
+        {
+            { "0" , GameManager.Instance.ControllerData.DataTalk.GetData("Task_2_End_1")},
+            { "1" , GameManager.Instance.ControllerData.DataTalk.GetData("Task_2_End_2")},
+        };
+        Dictionary<string, string> dataUI = new Dictionary<string, string>()
+        {
+            { "0" , GameManager.Instance.ControllerData.DataUI.GetData("Task_2_End_1")},
+            { "1" , GameManager.Instance.ControllerData.DataUI.GetData("Task_2_End_2")},
+        };
+        
+        yield return StartCoroutine(ReadAndShowUI("Task_2_End_1", "Task_2_End_1"));
+        yield return StartCoroutine(WaitTime(1f));
+        yield return StartCoroutine(GameManager.Instance.ControllerUI.UIFace1.Fade(1, 0, 1f));
+        yield return StartCoroutine(ReadAndShowUI("Task_2_End_2", "Task_2_End_2"));
+        
+        UnityAction cameraChange = GameManager.Instance.MainCamera.TriggerScreenFade;
+        yield return StartCoroutine(GameManager.Instance.ControllerUI.UIButtonTask1.OnClickAddListener(cameraChange));
+        bool flag = false;
+        yield return StartCoroutine(GameManager.Instance.ControllerUI.UIButtonTask1.OnClickAddListener(()=>flag = true));
+
+        yield return StartCoroutine(GameManager.Instance.ControllerUI.UIButtonTask1.OpenNowUI(1f));
+
+        while (!flag)
+        {
+            yield return null;
+        }
+        
+        
+        Debug.Log("所有的都结束啦");
+        //TODO:这里执行任务一结束的方法
+    }
 }
