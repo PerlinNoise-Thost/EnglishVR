@@ -35,7 +35,8 @@ public class Task_1 : Task_Base
     /// <returns></returns>
     public override List<IEnumerator> TaskSequence => new List<IEnumerator>()
     {
-        WaitTime(1f),
+       
+        /*WaitTime(1f),
 
         GameManager.Instance.ControllerUI.UIScreen.SetTitel(uiData_Screen_Title),
         GameManager.Instance.ControllerUI.UIScreen.SetContent(uiData_Screen_Content_1),
@@ -54,18 +55,17 @@ public class Task_1 : Task_Base
         WaitTime(5f),
         GameManager.Instance.ControllerUI.UIFace1.ExitNowUI(), //关闭 Face_1 面板
 
-        /* 教师导入部分完成 */
+        /* 教师导入部分完成 #1#
         GameManager.Instance.ControllerUI.UIScreen.Fade(1f, 0f, 1f),
         GameManager.Instance.ControllerUI.UIScreen.SetContent(uiData_Screen_Content_2),
         WaitTime(3f),
         GameManager.Instance.ControllerUI.UIScreen.Fade(0f, 1f, 1f),
 
-        //ReturnItem(),
+        ReturnItem(),
         
         GameManager.Instance.ControllerUI.UIFace1.SetContent(null),
         GameManager.Instance.ControllerUI.UIFace1.OpenNowUI(1f),
-        Task_1_End(),
-        
+        Task_1_End(),*/
     };
 
     /// <summary>
@@ -90,16 +90,6 @@ public class Task_1 : Task_Base
         };
 
         yield return StartCoroutine(ConcurrentTake(Itemp));
-    }
-
-    /// <summary>
-    /// 等待时间
-    /// </summary>
-    /// <param name="timer">时间</param>
-    /// <returns></returns>
-    public IEnumerator WaitTime(float timer)
-    {
-        yield return new WaitForSeconds(timer);
     }
 
     /// <summary>

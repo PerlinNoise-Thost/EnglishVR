@@ -52,11 +52,14 @@ public class GameManager : MonoBehaviour
     public Controller_UI ControllerUI;
     //Talk控制
     public Controller_Talk ControllerTalk;
+    //路线导航
+    public Controller_NAV ControllerNav;
     //Prop控制
     public Controller_Prop ControllerProp;
     //相机
     public MainCamera MainCamera;
-    
+    //NPC控制
+    public Controller_NPC ControllerNpc;
     
     public void Awake()
     {

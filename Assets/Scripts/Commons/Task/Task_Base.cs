@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class Task_Base : MonoBehaviour,ITask,IInitialization
@@ -39,5 +40,15 @@ public abstract class Task_Base : MonoBehaviour,ITask,IInitialization
         {
             yield return coroutine; 
         }
+    }
+    
+    /// <summary>
+    /// 等待时间
+    /// </summary>
+    /// <param name="timer">时间</param>
+    /// <returns></returns>
+    public IEnumerator WaitTime(float timer)
+    {
+        yield return new WaitForSeconds(timer);
     }
 }

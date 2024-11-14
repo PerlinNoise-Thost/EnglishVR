@@ -16,4 +16,7 @@ public class Controller_Prop : Controller_Base
     public Prop_Showcase_T1_3 propShowcaseT13;
     public Prop_Showcase_T1_4 propShowcaseT14;
     public Prop_Showcase_T1_5 propShowcaseT15;
+
+    [Header("Counter")] 
+    public Prop_Showcase_Counter PropShowcaseCounter;
 }

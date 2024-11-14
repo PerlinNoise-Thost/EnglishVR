@@ -29,11 +29,11 @@ public class Controller_Task : Controller_Base,IInitialization
     }
 
     public Task_1 Task1;
+    public Task_2 Task2;
     
     [Header("任务执行排序")] 
     public List<string> Task_Execute_Key = new List<string>()
     {
-        "Task_1"
     };
     
     /// <summary>
