@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-    public class NPC_Task_2_1 : NPC_Base
+    public class NPC_Task_2_2 : NPC_Base
     {
         public Animation _animation = null;
         public override IEnumerator Data_Set()

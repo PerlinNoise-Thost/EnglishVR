@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Data_UI : Data_Base<Data_UI>
@@ -12,7 +13,11 @@ public class Data_UI : Data_Base<Data_UI>
         public string ID;
         public string Content;
     }
+    
     //数据
+    [ShowInInspector]
+    [Searchable]
+    //[ReadOnly]
     private Dictionary<string, _Data> dataSheet;
     //长度
     public int length = 2;

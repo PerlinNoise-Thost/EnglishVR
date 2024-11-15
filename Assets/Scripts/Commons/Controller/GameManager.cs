@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
 
     #endregion
     
+    //相机
+    public MainCamera MainCamera;
     //数据控制
     public Controller_Data ControllerData;
     //任务控制
@@ -56,8 +58,6 @@ public class GameManager : MonoBehaviour
     public Controller_NAV ControllerNav;
     //Prop控制
     public Controller_Prop ControllerProp;
-    //相机
-    public MainCamera MainCamera;
     //NPC控制
     public Controller_NPC ControllerNpc;
     

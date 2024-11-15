@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Data_Talk : Data_Base<Data_Talk>
@@ -12,7 +13,11 @@ public class Data_Talk : Data_Base<Data_Talk>
         public string Content;
         public AudioClip audio;
     }
+    
     //字典
+    [ShowInInspector]
+    [Searchable]
+    //[ReadOnly]
     private Dictionary<string, _Data> dataSheet;
     
     //路径
